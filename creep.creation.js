@@ -2,7 +2,7 @@ module.exports = { create() {
    var minimums = [3, 1, 1];
    var roles = [
       {role: "harvester", prefix: "H", ratio: [0, 1]},
-      {role: "charger", prefix: "C", ratio: [1, 0]},
+      {role: "builder", prefix: "C", ratio: [1, 0]},
       {role: "upgrader", prefix: "U", ratio: [1, 0]},
       {role: "builder", prefix: "B", ratio: [1, 0]},
    ];
