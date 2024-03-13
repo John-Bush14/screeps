@@ -7,7 +7,7 @@
  * mod.thing == 'a thing'; // true
  */
 
-module.exports = { renew() {
+module.exports = { create() {
     var minimums = [3, 1, 1];
     var roles = ["harvester", "upgrader", "builder"];
     var fulfilled = 0;
