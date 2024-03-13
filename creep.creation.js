@@ -1,24 +1,24 @@
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports.thing = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('creep.renewal');
- * mod.thing == 'a thing'; // true
- */
-
 module.exports = { create() {
-    var minimums = [3, 1, 1];
-    var roles = ["harvester", "upgrader", "builder"];
-    var fulfilled = 0;
+   var minimums = [3, 1, 1];
+   var roles = [
+      {role: "harvester", prefix: "H", ratio: [0, 1]},
+      {role: "charger", prefix: "C", ratio: [1, 0]},
+      {role: "upgrader", prefix: "U", ratio: [1, 0]},
+      {role: "builder", prefix: "B", ratio: [1, 0]},
+   ];
+  var default = 2;
+
     
-    for(var i in [0, 1, 2]) {
-        roleAmount = _.filter(Game.creeps, (creep) => creep.memory.role == roles[i]).length;
-        if (roleAmount < minimums[i]) {
-            Game.spawns["Main"].spawnCreep([WORK, MOVE, CARRY], role[i]+(roleAmount+1).toString(), {memory: {"role": roles[i]}})
-        } else {fulfilled += 1}
-    } if (fulfilled == 3) {
-        Game.spawns["Main"].spawnCreep(
-            [WORK, MOVE, CARRY], "H"+_.filter(Game.creeps, (creep) => creep.memory.role == roles[i]).length.toString(), {memory: {"role": "builder"}})
-    }
+   for(var i in [0, 1, 2]) {
+      roleAmount = _.filter(Game.creeps, (creep) => creep.memory.role == roles[i]["role"]).length;
+      if (roleAmount < minimums[i]) {
+         Game.spawns["Main"].spawnCreep(
+            [WORK, MOVE, CARRY], role[i]["prefix"]+(roleAmount+1).toString(), {memory: {"role": roles[i]["role"]}});
+         return;
+      }
+   }
+   Game.spawns["Main"].spawnCreep( 
+      [WORK, MOVE, CARRY], 
+      roles[default]["prefix"] + _.filter(Game.creeps, (creep) => creep.memory.role == roles[default]["role"]).length.toString(),
+      {memory: {"role": roles[default]["role"]}})
 }};
