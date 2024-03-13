@@ -7,13 +7,13 @@ var spawn = Game.spawns["Main"];
 var roles = {
    harvester: roleHarvester,
    upgrader: roleUpgrader,
-   builder: ruleBuilder,
+   builder: roleBuilder,
    charger: roleCharger
 };
 
 module.exports.loop = function () { 
 
-   if (spawn.store.getFreeCapacity() == 0) {creepCreation.create();}
+   if (spawn.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {creepCreation.create();}
 
       for(var name in Game.creeps) {
          var creep = Game.creeps[name];

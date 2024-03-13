@@ -6,19 +6,19 @@ module.exports = { create() {
       {role: "upgrader", prefix: "U", ratio: [1, 0]},
       {role: "builder", prefix: "B", ratio: [1, 0]},
    ];
-  var default = 2;
+  var surplus = 2;
 
     
    for(var i in [0, 1, 2]) {
       roleAmount = _.filter(Game.creeps, (creep) => creep.memory.role == roles[i]["role"]).length;
       if (roleAmount < minimums[i]) {
          Game.spawns["Main"].spawnCreep(
-            [WORK, MOVE, CARRY], role[i]["prefix"]+(roleAmount+1).toString(), {memory: {"role": roles[i]["role"]}});
+            [WORK, MOVE, CARRY], roles[i]["prefix"]+(roleAmount+1).toString(), {memory: {"role": roles[i]["role"]}});
          return;
       }
    }
    Game.spawns["Main"].spawnCreep( 
       [WORK, MOVE, CARRY], 
-      roles[default]["prefix"] + _.filter(Game.creeps, (creep) => creep.memory.role == roles[default]["role"]).length.toString(),
-      {memory: {"role": roles[default]["role"]}})
+      roles[surplus]["prefix"] + _.filter(Game.creeps, (creep) => creep.memory.role == roles[surplus]["role"]).length.toString(),
+      {memory: {"role": roles[surplus]["role"]}})
 }};
